@@ -1,26 +1,82 @@
-import { View, StyleSheet, Image, Text } from "react-native"
-const Detail = ({navigation, route}) =>{
+import { useState } from "react"
+import { View, StyleSheet, Image, Text, Button } from "react-native"
+const Detail = ({ navigation, route }) => {
     console.log('name---', route.params)
     const dish = route.params.data
+    const [counter, setCounter] = useState(1)
+    let totalPrice = counter * dish.price
+    const decreaseCounter = () => {
+        setCounter(counter > 1 ? counter -1 : counter )
+
+    }
+    const increaseCounter = () => {
+        setCounter(counter + 1)
+    }
     return <View>
-        <Image source={require(`D:/Tech/React-Native Tutorial/food-corner/assets/productImages/${dish.imagePath}`)} style={{width: 140,  height: 140}}/>
-                    <View style={styles.text}>
-                        <Text style={styles.name}>{dish.name}</Text>
-                        <Text style={styles.name}>Rs. {dish.price}</Text>
-                    </View>
+        <Image source={require(`D:/Tech/React-Native Tutorial/food-corner/assets/productImages/${dish.imagePath}`)} style={styles.foodImage} />
+        <View style={styles.text}>
+            <Text style={styles.name}>{dish.name}</Text>
+            <Text style={styles.name}>Rs. {dish.price}</Text>
+        </View>
+        <View>
+            <Text style={styles.descriptionText}>{dish.description}</Text>
+        </View>
+        <View style={styles.counterPrice}>
+            <Text style={styles.totalPriceText}>Total - $ {totalPrice}</Text>
+            <View style={styles.counter}>
+                <Button title="-"onPress={decreaseCounter} />
+                <Text style={styles.counterNumber}> {counter} </Text>
+                <Button title="+" onPress={increaseCounter} />
+            </View>
+        </View>
+        <Button title="Order" color="rgb(255, 99, 71)" onPress={()=> navigation.navigate('Detail', { data: item })}/>
     </View>
 }
 
-const styles= StyleSheet.create({
-    text : {
-        marginTop: 8,
-        marginBottom: 8
+const styles = StyleSheet.create({
+    text: {
+        marginTop: 14,
+        marginBottom: 14
     },
     name: {
         fontWeight: 'bold',
-        fontSize: 16,
-        marginTop: 2,
-        marginBottom: 2
+        fontSize: 22,
+        marginTop: 3,
+        marginBottom: 3,
+        textAlign: 'center'
+    },
+    foodImage: {
+        width: '100%',
+        height: 400,
+        resizeMode: 'cover'
+    },
+    descriptionText: {
+        fontSize: 19,
+        fontWeight: '500',
+        letterSpacing: 0.2,
+        textAlign: 'justify'
+    },
+    totalPriceText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        letterSpacing: 0.2,
+    },
+    counter: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 3
+    },
+    counterNumber: {
+        marginLeft: 6,
+        marginRight: 6,
+        fontSize: 15,
+        fontWeight: "bold"
+    },
+    counterPrice: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 15,
+        alignItems: 'center',
     }
 })
 export default Detail
