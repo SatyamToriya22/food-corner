@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View , ScrollView,  Button} from 'react-native';
+import Body from './Body';
 import Header from './Header';
 const Main = ({navigation}) => {
     return <ScrollView>
-            <View style={styles.container}>
-                <Header />
-                <Button
+            <View>
+                <Header navigation= {navigation}/>
+                {/* <Button
                     title="Go to  profile"
                     onPress={() =>
                         navigation.navigate('Detail', { name: 'Jane' })
                     }
-                />
+                /> */}
+                <Body navigation= {navigation}/>
             </View>
         </ScrollView>
 }

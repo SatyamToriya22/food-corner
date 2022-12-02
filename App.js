@@ -48,8 +48,9 @@ const styles = StyleSheet.create({
     headerTintColor: '#fff',
     headerTitleStyle: {
       fontWeight: 'bold',
-      fontSize: '25px'
-
+      fontSize: '25px',
+      letterSpacing: 2,
+      wordSpacing: 3
     },
     headerTitleAlign: 'center',
 
