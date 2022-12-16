@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Image, View, Text, StyleSheet, Button } from "react-native"
+import { Image, View, Text, StyleSheet, Button, Pressable } from "react-native"
 import data from '../../data.json'
 const FoodList = ({ type, navigation }) => {
     const [foodData, setFoodData] = useState(data['fastFood'])
@@ -16,7 +16,9 @@ const FoodList = ({ type, navigation }) => {
                         <Text style={styles.name}>{item.name}</Text>
                         <Text style={styles.name}>Rs. 200</Text>
                     </View>
-                    <Button title="Order" color="rgb(255, 99, 71)" onPress={()=> navigation.navigate('Detail', { data: item })}/>
+                    <Pressable style={{ ...styles.button, backgroundColor: "rgb(255,99,71)" }} onPress={()=> navigation.navigate('Detail', { data: item })}>
+                    <Text style={styles.Text}>Order</Text>
+                </Pressable>
                 </View>
             })
             }
@@ -48,7 +50,21 @@ const styles= StyleSheet.create({
         fontSize: 16,
         marginTop: 2,
         marginBottom: 2
-    }
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        borderRadius: 4,
+        elevation: 3
+    },
+    Text: {
+        fontSize: 18,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+    },
 })
 
 export default FoodList

@@ -1,16 +1,21 @@
 import { useState } from "react"
-import { View, StyleSheet, Image, Text, Button } from "react-native"
+import { View, StyleSheet, Image, Text, Button, Pressable } from "react-native"
 const Detail = ({ navigation, route }) => {
     console.log('name---', route.params)
     const dish = route.params.data
     const [counter, setCounter] = useState(1)
     let totalPrice = counter * dish.price
     const decreaseCounter = () => {
-        setCounter(counter > 1 ? counter -1 : counter )
+        setCounter(counter > 1 ? counter - 1 : counter)
 
     }
     const increaseCounter = () => {
         setCounter(counter + 1)
+    }
+
+    const onOrderClick = () => {
+        const data = { ...dish, totalPrice, quantity: counter }
+        navigation.navigate('Shipping', { data: data })
     }
     return <View>
         <Image source={require(`D:/Tech/React-Native Tutorial/food-corner/assets/productImages/${dish.imagePath}`)} style={styles.foodImage} />
@@ -24,12 +29,14 @@ const Detail = ({ navigation, route }) => {
         <View style={styles.counterPrice}>
             <Text style={styles.totalPriceText}>Total - $ {totalPrice}</Text>
             <View style={styles.counter}>
-                <Button title="-"onPress={decreaseCounter} />
+                <Button title="-" onPress={decreaseCounter} />
                 <Text style={styles.counterNumber}> {counter} </Text>
                 <Button title="+" onPress={increaseCounter} />
             </View>
         </View>
-        <Button title="Order" color="rgb(255, 99, 71)" onPress={()=> navigation.navigate('Detail', { data: item })}/>
+        <Pressable style={{ ...styles.button, backgroundColor: "rgb(255,99,71)" }} onPress={onOrderClick}>
+            <Text style={styles.Text}>Order</Text>
+        </Pressable>
     </View>
 }
 
@@ -77,6 +84,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 15,
         alignItems: 'center',
-    }
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        elevation: 3
+    },
+    Text: {
+        fontSize: 18,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+    },
 })
 export default Detail

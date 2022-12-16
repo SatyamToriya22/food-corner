@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainPage from './Components/Dashboard/Main'
 import DetailPage from './Components/FoodDetail/Detail'
+import ShippingDetails from './Components/Shipping/ShippingDetails';
+import CheckoutPage from './Components/Shipping/CheckoutPage';
 // import Icon from 'react-native-vector-icons/FontAwesome'
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 export default function App() {
@@ -11,22 +13,28 @@ export default function App() {
   // const Drawer = createDrawerNavigator();
   return (
     <NavigationContainer>
-              {/* <Drawer.Navigator initialRouteName="Home">
+      {/* <Drawer.Navigator initialRouteName="Home">
           <Drawer.Screen name="Home" component={MainPage} />
           <Drawer.Screen name="Detail" component={DetailPage} />
         </Drawer.Navigator> */}
       <Stack.Navigator
-        // screenOptions={{
-        //   headerShown: false
-        // }}
+      // screenOptions={{
+      //   headerShown: false
+      // }}
       >
         <Stack.Screen
           name="Home"
           component={MainPage}
-          options={{...styles.detail, title : 'Welcome to Food Corner'}}
+          options={{ ...styles.detail, title: 'Welcome to Food Corner' }}
         />
         <Stack.Screen name="Detail" component={DetailPage}
           options={styles.detail} />
+        <Stack.Screen name="Shipping" component={
+          ShippingDetails
+        } options={styles.detail} />
+        <Stack.Screen name="Checkout" component={
+          CheckoutPage
+        } options={styles.detail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -39,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  detail : {
+  detail: {
     title: '',
     headerStyle: {
       backgroundColor: '#f4511e',
