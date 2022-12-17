@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
 import { Image, View, Text, StyleSheet, Button, Pressable } from "react-native"
 import data from '../../data.json'
-const FoodList = ({ type, navigation }) => {
-    const [foodData, setFoodData] = useState(data['fastFood'])
-    useEffect(() => {
-        setFoodData(data[type])
-    }, [type])
+const FoodList = ({ foodData, navigation }) => {
     console.log('data', foodData)
     return <>
         <View style={styles.itemBox}>
-            {foodData.map((item, key) => {
+            {foodData?.map((item, key) => {
                 return <View key={key} style={styles.foodItem}>
                     <Image source={require(`D:/Tech/React-Native Tutorial/food-corner/assets/productImages/${item.imagePath}`)} style={{width: 140,  height: 140}}/>
                     <View style={styles.text}>
@@ -39,7 +35,8 @@ const styles= StyleSheet.create({
     itemBox : {
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        justifyContent: "center"
     },
     text : {
         marginTop: 8,

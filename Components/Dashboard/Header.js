@@ -1,27 +1,9 @@
 import { useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TextInput } from 'react-native';
 import data from "../../data.json"
-const Header = ({ navigation }) => {
+const Header = ({ searchItem }) => {
+  
   const image = require("D:/Tech/React-Native Tutorial/food-corner/assets/home_cover.webp");
-  const [filterData, setFilterData] = useState([])
-  const searchItem = (e) => {
-    const value = e.target.value.toLowerCase()
-    let foodData = []
-    if (value.length > 2) {
-      for (let foodItem in data) {
-        console.log('foodItem', foodItem)
-        let food = data[foodItem].filter((item) => {
-          let itemName = item.name.toLowerCase()
-          return itemName.includes(value)
-          }
-        )
-        foodData = [...foodData, ...food]
-        console.log('food-', food)
-      }
-    }
-    setFilterData(foodData)
-  }
-  console.log('filterData', filterData)
   return <View style={styles.container}>
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.imagebg}>
