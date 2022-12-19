@@ -17,21 +17,23 @@ const Detail = ({ navigation, route }) => {
         const data = { ...dish, totalPrice, quantity: counter }
         navigation.navigate('Shipping', { data: data })
     }
-    return <View>
-        <Image source={require(`D:/Tech/React-Native Tutorial/food-corner/assets/productImages/${dish.imagePath}`)} style={styles.foodImage} />
-        <View style={styles.text}>
-            <Text style={styles.name}>{dish.name}</Text>
-            <Text style={styles.name}>Rs. {dish.price}</Text>
-        </View>
+    return <View style={styles.main}>
         <View>
-            <Text style={styles.descriptionText}>{dish.description}</Text>
-        </View>
-        <View style={styles.counterPrice}>
-            <Text style={styles.totalPriceText}>Total - $ {totalPrice}</Text>
-            <View style={styles.counter}>
-                <Button title="-" onPress={decreaseCounter} />
-                <Text style={styles.counterNumber}> {counter} </Text>
-                <Button title="+" onPress={increaseCounter} />
+            <Image source={require(`D:/Tech/React-Native Tutorial/food-corner/assets/productImages/${dish.imagePath}`)} style={styles.foodImage} />
+            <View style={styles.text}>
+                <Text style={styles.name}>{dish.name}</Text>
+                <Text style={styles.name}>Rs. {dish.price}</Text>
+            </View>
+            <View>
+                <Text style={styles.descriptionText}>{dish.description}</Text>
+            </View>
+            <View style={styles.counterPrice}>
+                <Text style={styles.totalPriceText}>Total - $ {totalPrice}</Text>
+                <View style={styles.counter}>
+                    <Button title="-" onPress={decreaseCounter} />
+                    <Text style={styles.counterNumber}> {counter} </Text>
+                    <Button title="+" onPress={increaseCounter} />
+                </View>
             </View>
         </View>
         <Pressable style={{ ...styles.button, backgroundColor: "rgb(255,99,71)" }} onPress={onOrderClick}>
@@ -41,6 +43,10 @@ const Detail = ({ navigation, route }) => {
 }
 
 const styles = StyleSheet.create({
+    main: {
+        flex: 1,
+        justifyContent: "space-between"
+    },
     text: {
         marginTop: 14,
         marginBottom: 14
@@ -97,6 +103,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'white',
-    },
+    }
 })
 export default Detail
